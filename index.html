@@ -3,47 +3,36 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Animasi Bunga Mekar</title>
+  <title>Animasi Nama Hendri</title>
   <style>
     body {
-      background-color: #fef6f0;
+      background: linear-gradient(135deg, #f0f0f0, #ffe4e1);
+      margin: 0;
+      height: 100vh;
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100vh;
-      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
     }
 
-    .flower {
-      width: 200px;
-      height: 200px;
+    .nama {
+      font-size: 4rem;
+      font-weight: bold;
+      color: #ff4d6d;
+      opacity: 0;
+      transform: scale(0.8);
+      animation: muncul 2s ease-out forwards;
     }
 
-    .petal {
-      transform-origin: center;
-      transform: scale(0);
-      animation: bloom 1s ease-out forwards;
-    }
-
-    .petal:nth-of-type(1) { animation-delay: 0.1s; }
-    .petal:nth-of-type(2) { animation-delay: 0.3s; }
-    .petal:nth-of-type(3) { animation-delay: 0.5s; }
-    .petal:nth-of-type(4) { animation-delay: 0.7s; }
-
-    @keyframes bloom {
+    @keyframes muncul {
       to {
+        opacity: 1;
         transform: scale(1);
       }
     }
   </style>
 </head>
 <body>
-  <svg class="flower" viewBox="0 0 200 200">
-    <circle class="petal" cx="100" cy="50" r="30" fill="#FF69B4" />
-    <circle class="petal" cx="150" cy="100" r="30" fill="#FF69B4" />
-    <circle class="petal" cx="100" cy="150" r="30" fill="#FF69B4" />
-    <circle class="petal" cx="50" cy="100" r="30" fill="#FF69B4" />
-    <circle cx="100" cy="100" r="20" fill="#FFD700" />
-  </svg>
+  <div class="nama">Hendri</div>
 </body>
 </html>
