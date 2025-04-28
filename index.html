@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Website Hendri Animasi Zoom</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Website Hendri - Navigasi Ikon</title>
+
   <style>
     body {
       margin: 0;
+      padding: 0;
       height: 100vh;
       display: flex;
       flex-direction: column;
@@ -15,40 +17,66 @@
       font-family: Arial, sans-serif;
       background: linear-gradient(135deg, #fef6f0, #ffe4e1);
       overflow: hidden;
-    }
-
-    .nav {
-      margin-bottom: 20px;
-    }
-
-    .nav button {
-      margin: 0 10px;
-      padding: 10px 20px;
-      font-size: 16px;
-      border: none;
-      background-color: #ff4d6d;
-      color: white;
-      border-radius: 5px;
-      cursor: pointer;
-      transition: background-color 0.3s;
-    }
-
-    .nav button:hover {
-      background-color: #ff2c4d;
-    }
-
-    .nav button.active {
-      background-color: #ff2c4d;
-      font-weight: bold;
+      position: relative;
     }
 
     .content {
+      flex-grow: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
       font-size: 24px;
       text-align: center;
       max-width: 600px;
-      opacity: 1;
-      transform: scale(1);
       transition: transform 0.5s ease, opacity 0.5s ease;
+    }
+
+    .nav {
+      width: 100%;
+      position: fixed;
+      bottom: 0;
+      background-color: white;
+      padding: 8px 0;
+      display: flex;
+      justify-content: space-around;
+      box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+    }
+
+    .nav button {
+      background: none;
+      border: none;
+      outline: none;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: #555;
+      font-size: 12px;
+      position: relative;
+      padding: 5px;
+      cursor: pointer;
+    }
+
+    .nav button svg {
+      width: 24px;
+      height: 24px;
+      margin-bottom: 5px;
+      transition: fill 0.3s;
+    }
+
+    .nav button.active svg {
+      fill: #ff4d6d;
+    }
+
+    .nav button.active::before {
+      content: '';
+      position: absolute;
+      top: -10px;
+      width: 40px;
+      height: 40px;
+      background: white;
+      border-radius: 50%;
+      z-index: -1;
     }
 
     .zoom-in {
@@ -61,17 +89,30 @@
       transform: scale(1.5);
     }
   </style>
+
 </head>
 <body>
 
-  <div class="nav">
-    <button id="btn-home" class="active" onclick="tampilkan('home')">Home</button>
-    <button id="btn-tentang" onclick="tampilkan('tentang')">Tentang Saya</button>
-    <button id="btn-kontak" onclick="tampilkan('kontak')">Kontak</button>
-  </div>
-
   <div class="content" id="konten">
     Selamat Datang di Website Hendri!
+  </div>
+
+  <div class="nav">
+    <button id="btn-home" class="active" onclick="tampilkan('home')">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l10 9h-3v9h-5v-6h-4v6H5v-9H2z"/></svg>
+      <span>Home</span>
+    </button>
+    <button id="btn-tentang" onclick="tampilkan('tentang')">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4S8 5.79 8 8s1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4
+       v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+      <span>Tentang</span>
+    </button>
+    <button id="btn-kontak" onclick="tampilkan('kontak')">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M21 8V7l-3 2-2-2-2 2-2-2-2 2-2-2-2 2-2-2-3 2v1l3-2 
+       2 2 2-2 2 2 2-2 2 2 2-2 2 2zM3 9v10c0 1.1.9 2 2 2h14c1.1 0 
+       2-.9 2-2V9l-3 2-2-2-2 2-2-2-2 2-2-2-2 2-3-2z"/></svg>
+      <span>Kontak</span>
+    </button>
   </div>
 
   <script>
@@ -84,10 +125,8 @@
       const indexBaru = halamanUrutan.indexOf(halamanBaru);
 
       if (indexBaru > indexLama) {
-        // Maju -> zoom in
         konten.classList.add('zoom-in');
       } else if (indexBaru < indexLama) {
-        // Mundur -> zoom out
         konten.classList.add('zoom-out');
       }
 
@@ -104,7 +143,6 @@
 
       halamanSekarang = halamanBaru;
 
-      // Update tombol aktif
       document.querySelectorAll('.nav button').forEach(btn => btn.classList.remove('active'));
       document.getElementById('btn-' + halamanBaru).classList.add('active');
     }
