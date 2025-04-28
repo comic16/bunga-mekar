@@ -3,149 +3,125 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Website Hendri - Navigasi Ikon</title>
-
+  <title>Undangan Digital Hendri</title>
+  
   <style>
     body {
       margin: 0;
       padding: 0;
       height: 100vh;
       display: flex;
-      flex-direction: column;
       justify-content: center;
       align-items: center;
-      font-family: Arial, sans-serif;
-      background: linear-gradient(135deg, #fef6f0, #ffe4e1);
+      background-color: #fff5e6;
+      font-family: 'Arial', sans-serif;
       overflow: hidden;
       position: relative;
     }
 
-    .content {
-      flex-grow: 1;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-size: 24px;
+    .container {
       text-align: center;
-      max-width: 600px;
-      transition: transform 0.5s ease, opacity 0.5s ease;
-    }
-
-    .nav {
-      width: 100%;
-      position: fixed;
-      bottom: 0;
-      background-color: white;
-      padding: 8px 0;
-      display: flex;
-      justify-content: space-around;
-      box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
-    }
-
-    .nav button {
-      background: none;
-      border: none;
-      outline: none;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      color: #555;
-      font-size: 12px;
       position: relative;
-      padding: 5px;
-      cursor: pointer;
+      z-index: 1;
     }
 
-    .nav button svg {
-      width: 24px;
-      height: 24px;
-      margin-bottom: 5px;
-      transition: fill 0.3s;
-    }
-
-    .nav button.active svg {
-      fill: #ff4d6d;
-    }
-
-    .nav button.active::before {
-      content: '';
+    .flower {
       position: absolute;
-      top: -10px;
-      width: 40px;
-      height: 40px;
-      background: white;
+      top: -50px;
+      left: 50%;
+      transform: translateX(-50%);
+      animation: flower-move 6s infinite alternate;
+    }
+
+    .flower img {
+      width: 100px;
+    }
+
+    .name {
+      font-size: 36px;
+      color: #ff4d6d;
+      margin: 20px;
+      opacity: 0;
+      animation: fadeIn 2s forwards 1s;
+    }
+
+    .photo {
       border-radius: 50%;
-      z-index: -1;
+      width: 150px;
+      height: 150px;
+      margin-top: 20px;
+      opacity: 0;
+      animation: fadeIn 2s forwards 2s;
     }
 
-    .zoom-in {
+    .text {
+      font-size: 18px;
+      color: #333;
+      margin-top: 20px;
       opacity: 0;
-      transform: scale(0.5);
+      animation: fadeIn 2s forwards 3s;
     }
 
-    .zoom-out {
-      opacity: 0;
-      transform: scale(1.5);
+    @keyframes flower-move {
+      0% {
+        transform: translateX(-50%) rotate(0deg);
+      }
+      100% {
+        transform: translateX(-50%) rotate(360deg);
+      }
     }
+
+    @keyframes fadeIn {
+      to {
+        opacity: 1;
+      }
+    }
+
+    .footer {
+      position: fixed;
+      bottom: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 14px;
+      color: #777;
+    }
+
   </style>
 
 </head>
 <body>
 
-  <div class="content" id="konten">
-    Selamat Datang di Website Hendri!
+  <div class="container">
+    <div class="flower">
+      <img src="https://www.example.com/flower.png" alt="Flower">
+    </div>
+    <div class="name">
+      Hendri & Teman
+    </div>
+    <div class="photo">
+      <img src="https://www.example.com/foto.jpg" alt="Foto">
+    </div>
+    <div class="text">
+      Kami mengundang Anda untuk hadir dalam acara spesial kami.
+    </div>
   </div>
 
-  <div class="nav">
-    <button id="btn-home" class="active" onclick="tampilkan('home')">
-      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l10 9h-3v9h-5v-6h-4v6H5v-9H2z"/></svg>
-      <span>Home</span>
-    </button>
-    <button id="btn-tentang" onclick="tampilkan('tentang')">
-      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4S8 5.79 8 8s1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4
-       v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
-      <span>Tentang</span>
-    </button>
-    <button id="btn-kontak" onclick="tampilkan('kontak')">
-      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M21 8V7l-3 2-2-2-2 2-2-2-2 2-2-2-2 2-2-2-3 2v1l3-2 
-       2 2 2-2 2 2 2-2 2 2 2-2 2 2zM3 9v10c0 1.1.9 2 2 2h14c1.1 0 
-       2-.9 2-2V9l-3 2-2-2-2 2-2-2-2 2-2-2-2 2-3-2z"/></svg>
-      <span>Kontak</span>
-    </button>
+  <div class="footer">
+    Undangan Digital
   </div>
 
   <script>
-    const halamanUrutan = ['home', 'tentang', 'kontak'];
-    let halamanSekarang = 'home';
+    // Animasi bunga yang bergerak terus-menerus
+    const flower = document.querySelector('.flower');
+    let rotation = 0;
 
-    function tampilkan(halamanBaru) {
-      const konten = document.getElementById('konten');
-      const indexLama = halamanUrutan.indexOf(halamanSekarang);
-      const indexBaru = halamanUrutan.indexOf(halamanBaru);
-
-      if (indexBaru > indexLama) {
-        konten.classList.add('zoom-in');
-      } else if (indexBaru < indexLama) {
-        konten.classList.add('zoom-out');
-      }
-
-      setTimeout(() => {
-        if (halamanBaru === 'home') {
-          konten.innerHTML = "Selamat Datang di Website Hendri!";
-        } else if (halamanBaru === 'tentang') {
-          konten.innerHTML = "Saya Hendri, seorang yang suka belajar web development!";
-        } else if (halamanBaru === 'kontak') {
-          konten.innerHTML = "Hubungi saya di: hendri@email.com";
-        }
-        konten.classList.remove('zoom-in', 'zoom-out');
-      }, 300);
-
-      halamanSekarang = halamanBaru;
-
-      document.querySelectorAll('.nav button').forEach(btn => btn.classList.remove('active'));
-      document.getElementById('btn-' + halamanBaru).classList.add('active');
+    function animateFlower() {
+      rotation += 1;
+      flower.style.transform = `translateX(-50%) rotate(${rotation}deg)`;
+      requestAnimationFrame(animateFlower);
     }
+
+    animateFlower();
   </script>
 
 </body>
