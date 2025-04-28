@@ -1,128 +1,36 @@
 <!DOCTYPE html>
-<html lang="id">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Undangan Digital Hendri</title>
-  
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background-color: #fff5e6;
-      font-family: 'Arial', sans-serif;
-      overflow: hidden;
-      position: relative;
-    }
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Digital Invitation</title>
 
-    .container {
-      text-align: center;
-      position: relative;
-      z-index: 1;
-    }
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Undangan Digital</h1>
+      <p>Kami mengundang Anda untuk menghadiri acara kami.</p>
 
-    .flower {
-      position: absolute;
-      top: -50px;
-      left: 50%;
-      transform: translateX(-50%);
-      animation: flower-move 6s infinite alternate;
-    }
+      <div>
+        <h2>Nama</h2>
+        <p>[Nama 1] & [Nama 2]</p>
+      </div>
 
-    .flower img {
-      width: 100px;
-    }
+      <div>
+        <h2>Waktu & Tempat</h2>
+        <p>Tanggal: [Tanggal Acara]</p>
+        <p>Tempat: [Lokasi Acara]</p>
+      </div>
 
-    .name {
-      font-size: 36px;
-      color: #ff4d6d;
-      margin: 20px;
-      opacity: 0;
-      animation: fadeIn 2s forwards 1s;
-    }
-
-    .photo {
-      border-radius: 50%;
-      width: 150px;
-      height: 150px;
-      margin-top: 20px;
-      opacity: 0;
-      animation: fadeIn 2s forwards 2s;
-    }
-
-    .text {
-      font-size: 18px;
-      color: #333;
-      margin-top: 20px;
-      opacity: 0;
-      animation: fadeIn 2s forwards 3s;
-    }
-
-    @keyframes flower-move {
-      0% {
-        transform: translateX(-50%) rotate(0deg);
-      }
-      100% {
-        transform: translateX(-50%) rotate(360deg);
-      }
-    }
-
-    @keyframes fadeIn {
-      to {
-        opacity: 1;
-      }
-    }
-
-    .footer {
-      position: fixed;
-      bottom: 10px;
-      left: 50%;
-      transform: translateX(-50%);
-      font-size: 14px;
-      color: #777;
-    }
-
-  </style>
-
-</head>
-<body>
-
-  <div class="container">
-    <div class="flower">
-      <img src="https://www.example.com/flower.png" alt="Flower">
+      <div>
+        <h2>Konfirmasi Kehadiran</h2>
+        <p>Silakan konfirmasi kehadiran Anda melalui tombol di bawah ini.</p>
+        <a href="#" class="button">Konfirmasi</a>
+      </div>
     </div>
-    <div class="name">
-      Hendri & Teman
-    </div>
-    <div class="photo">
-      <img src="https://www.example.com/foto.jpg" alt="Foto">
-    </div>
-    <div class="text">
-      Kami mengundang Anda untuk hadir dalam acara spesial kami.
-    </div>
-  </div>
 
-  <div class="footer">
-    Undangan Digital
-  </div>
-
-  <script>
-    // Animasi bunga yang bergerak terus-menerus
-    const flower = document.querySelector('.flower');
-    let rotation = 0;
-
-    function animateFlower() {
-      rotation += 1;
-      flower.style.transform = `translateX(-50%) rotate(${rotation}deg)`;
-      requestAnimationFrame(animateFlower);
-    }
-
-    animateFlower();
-  </script>
-
-</body>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"></script>
+  </body>
 </html>
