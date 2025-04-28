@@ -3,36 +3,112 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Animasi Nama Hendri</title>
+  <title>Website Hendri Animasi Zoom</title>
   <style>
     body {
-      background: linear-gradient(135deg, #f0f0f0, #ffe4e1);
       margin: 0;
       height: 100vh;
       display: flex;
+      flex-direction: column;
       justify-content: center;
       align-items: center;
-      font-family: 'Segoe UI', sans-serif;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #fef6f0, #ffe4e1);
+      overflow: hidden;
     }
 
-    .nama {
-      font-size: 4rem;
+    .nav {
+      margin-bottom: 20px;
+    }
+
+    .nav button {
+      margin: 0 10px;
+      padding: 10px 20px;
+      font-size: 16px;
+      border: none;
+      background-color: #ff4d6d;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .nav button:hover {
+      background-color: #ff2c4d;
+    }
+
+    .nav button.active {
+      background-color: #ff2c4d;
       font-weight: bold;
-      color: #ff4d6d;
-      opacity: 0;
-      transform: scale(0.8);
-      animation: muncul 2s ease-out forwards;
     }
 
-    @keyframes muncul {
-      to {
-        opacity: 1;
-        transform: scale(1);
-      }
+    .content {
+      font-size: 24px;
+      text-align: center;
+      max-width: 600px;
+      opacity: 1;
+      transform: scale(1);
+      transition: transform 0.5s ease, opacity 0.5s ease;
+    }
+
+    .zoom-in {
+      opacity: 0;
+      transform: scale(0.5);
+    }
+
+    .zoom-out {
+      opacity: 0;
+      transform: scale(1.5);
     }
   </style>
 </head>
 <body>
-  <div class="nama">Hendri</div>
+
+  <div class="nav">
+    <button id="btn-home" class="active" onclick="tampilkan('home')">Home</button>
+    <button id="btn-tentang" onclick="tampilkan('tentang')">Tentang Saya</button>
+    <button id="btn-kontak" onclick="tampilkan('kontak')">Kontak</button>
+  </div>
+
+  <div class="content" id="konten">
+    Selamat Datang di Website Hendri!
+  </div>
+
+  <script>
+    const halamanUrutan = ['home', 'tentang', 'kontak'];
+    let halamanSekarang = 'home';
+
+    function tampilkan(halamanBaru) {
+      const konten = document.getElementById('konten');
+      const indexLama = halamanUrutan.indexOf(halamanSekarang);
+      const indexBaru = halamanUrutan.indexOf(halamanBaru);
+
+      if (indexBaru > indexLama) {
+        // Maju -> zoom in
+        konten.classList.add('zoom-in');
+      } else if (indexBaru < indexLama) {
+        // Mundur -> zoom out
+        konten.classList.add('zoom-out');
+      }
+
+      setTimeout(() => {
+        if (halamanBaru === 'home') {
+          konten.innerHTML = "Selamat Datang di Website Hendri!";
+        } else if (halamanBaru === 'tentang') {
+          konten.innerHTML = "Saya Hendri, seorang yang suka belajar web development!";
+        } else if (halamanBaru === 'kontak') {
+          konten.innerHTML = "Hubungi saya di: hendri@email.com";
+        }
+        konten.classList.remove('zoom-in', 'zoom-out');
+      }, 300);
+
+      halamanSekarang = halamanBaru;
+
+      // Update tombol aktif
+      document.querySelectorAll('.nav button').forEach(btn => btn.classList.remove('active'));
+      document.getElementById('btn-' + halamanBaru).classList.add('active');
+    }
+  </script>
+
 </body>
 </html>
